@@ -1,14 +1,23 @@
+const chars = 'ABCDEFGHIJK0123456789';
+
 const btn = document.querySelector('button');
-const div = document.querySelector('div');
+const section = document.querySelector('section');
 
-const names = ["Dobrusia", "Jagienka", "Marysia", "Ewa", "Bogumiła", "Magda", "Ola"];
+const codesNumber = 1000;
+const charsNumber = 14;
 
-const prefixes = ["Wydaje mi się", "Mam wrażenie", "Myślę", "Szczerze uważam", "Jestem przekonany"];
-
-const nameGenerator = () => {
-    const indexName = Math.floor(Math.random() * names.length);
-    const indexPrefix = Math.floor(Math.random() * prefixes.length);
-    div.textContent = `${prefixes[indexPrefix]}, że najlepsze imię to: ${names[indexName]}`;
+const generateCodes = () => {
+    for (let i = 0; i < codesNumber; i++) {
+        let code = "";
+        // Math.floor(Math.random() * chars.length)
+        for (let i = 0; i < charsNumber; i++) {
+            const index = Math.floor(Math.random() * chars.length);
+            code += chars[index];
+        }
+        const div = document.createElement('div');
+        div.textContent = code;
+        section.appendChild(div);
+    }
 }
 
-btn.addEventListener('click', nameGenerator);
+btn.addEventListener('click', generateCodes);
