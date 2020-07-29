@@ -1,32 +1,19 @@
-const div = document.querySelector('div');
-let divX = 150;
-let divY = 50;
-div.style.left = `${divY}px`;
-div.style.top = `${divY}px`;
+let red = 100;
+let blue = 100;
+let green = 100;
 
-let drawActive = false;
-let insertDivX;
-let insertDivY;
+document.body.style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
 
-div.addEventListener('mousedown', (e) => {
-    div.style.backgroundColor = 'grey';
-    drawActive = !drawActive;
-
-    insertDivX = e.offsetX;
-    insertDivY = e.offsetY;
-    console.log(insertDivX, insertDivY);
-})
-
-div.addEventListener('mousemove', (e) => {
-    if (drawActive) {
-        divX = e.clientX - insertDivX;
-        divY = e.clientY - insertDivY;
-        div.style.left = `${divX}px`;
-        div.style.top = `${divY}px`;
+const changeColor = (e) => {
+    console.log(e.keyCode);
+    switch (e.keyCode) {
+        case 38:
+            document.body.style.backgroundColor = `rgb(${red < 255 ? ++red : red}, ${blue < 255 ? ++blue : blue}, ${green < 255 ? ++green : green})`;
+            break;
+        case 40:
+            document.body.style.backgroundColor = `rgb(${red > 0 ? --red : red}, ${blue > 0 ? --blue : blue}, ${green > 0 ? --green : green})`;
+            break;
     }
-})
+}
 
-div.addEventListener('mouseup', () => {
-    div.style.backgroundColor = 'black';
-    drawActive = !drawActive;
-})
+window.addEventListener('keydown', changeColor);
