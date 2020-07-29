@@ -1,15 +1,32 @@
-// const h1 = document.querySelector('h1');
+const div = document.querySelector('div');
+let divX = 150;
+let divY = 50;
+div.style.left = `${divY}px`;
+div.style.top = `${divY}px`;
 
-// document.body.addEventListener('mousemove', function(e) {
-//     const x = e.clientX;
-//     const y = e.clientY;
-//     const width = window.innerWidth;
-//     const height = window.innerHeight;
-//     h1.textContent = `${x}, ${y}`;
+let drawActive = false;
+let insertDivX;
+let insertDivY;
 
-//     const red = x / width * 255;
-//     const green = y / height * 255;
-//     const blue = ((x / width * 255) + (y / height * 255)) / 2;
+div.addEventListener('mousedown', (e) => {
+    div.style.backgroundColor = 'grey';
+    drawActive = !drawActive;
 
-//     document.body.style.backgroundColor = `rgb(${red}, ${green}, ${red / green})`;
-// })
+    insertDivX = e.offsetX;
+    insertDivY = e.offsetY;
+    console.log(insertDivX, insertDivY);
+})
+
+div.addEventListener('mousemove', (e) => {
+    if (drawActive) {
+        divX = e.clientX - insertDivX;
+        divY = e.clientY - insertDivY;
+        div.style.left = `${divX}px`;
+        div.style.top = `${divY}px`;
+    }
+})
+
+div.addEventListener('mouseup', () => {
+    div.style.backgroundColor = 'black';
+    drawActive = !drawActive;
+})
