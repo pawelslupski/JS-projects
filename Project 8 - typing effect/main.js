@@ -6,17 +6,33 @@
 
 const spnText = document.querySelector('.text');
 const spnCursor = document.querySelector('.cursor');
-const txt = ['tekst1', 'tekst2', 'tekst3']
+
+const sentences = ['Siemanko', 'Fajnie, że jesteś:)', 'Zaczynamy...'];
+
+let index = 0;
+let letterIndex = 0;
 
 // Implementacja
 const addLetter = () => {
-    // Użyj w środku setTimeout
+    spnText.textContent += sentences[index][letterIndex];
+    letterIndex++;
+    if (letterIndex === sentences[index].length) {
+        index++;
+        if (index === sentences.length) return;
+        return setTimeout(() => {
+            letterIndex = 0;
+            spnText.textContent = "";
+            addLetter();
+        }, 2000);
+    };
+    setTimeout(addLetter, 100);
 }
 
-addLetter(); //pierwsze wywołanie
+addLetter(); // pierwsze wywołanie
 
-// Animacja kursora (zostaw bez zmian)
+// Animacja kursora (zostaw bez zmian) 
 const cursorAnimation = () => {
     spnCursor.classList.toggle('active');
 }
+
 setInterval(cursorAnimation, 400);
