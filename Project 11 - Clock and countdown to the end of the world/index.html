@@ -4,28 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 11 - The current hour</title>
+    <title>Project 11 - Stopwatch</title>
     <style>
-        * {
+        body {
             margin: 0;
         }
         
-        div {
-            line-height: 100vh;
+        .time {
+            position: absolute;
+            width: 100vw;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-size: 45px;
             text-align: center;
-            font-size: 30px;
-            font-family: arial;
+            font-family: monospace;
         }
         
-        span {
-            font-weight: bold;
-            font-family: monospace;
+        button {
+            font-size: 26px;
+            margin: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="clock">Godzina: <span></span></div>
+    <button class="main">Start</button>
+    <button class="reset">Reset</button>
+    <div class="time">
+        <p>Czas od startu</p>
+        <div>---</div>
+    </div>
     <script src="main.js"></script>
 </body>
 

@@ -1,14 +1,29 @@
-const clock = () => {
-    const time = new Date();
+const startBtn = document.querySelector('button.main');
+const resetBtn = document.querySelector('button.reset');
+const div = document.querySelector('div.time');
 
-    localeTimeString = time.toLocaleTimeString();
+let currentTime = 0.00;
+let index = 0;
 
-    // const seconds = time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds();
-    // const minutes = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
-    // const hours = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
-
-    // document.querySelector('.clock span').textContent = `${hours}:${minutes}:${seconds}`;
-    document.querySelector('.clock span').textContent = `${localeTimeString}`;
+const timer = () => {
+    if (startBtn.textContent === 'Start') {
+        startBtn.textContent = 'Pause';
+        index = setInterval(() => {
+            currentTime += 0.01;
+            div.textContent = currentTime.toFixed(2);
+        }, 10);
+    } else {
+        startBtn.textContent = "Start";
+        clearInterval(index);
+    }
 }
 
-setInterval(clock, 1000);
+const reset = () => {
+    startBtn.textContent = "Start";
+    clearInterval(index);
+    currentTime = 0.00;
+    div.textContent = currentTime.toFixed(2);
+}
+
+startBtn.addEventListener('click', timer);
+resetBtn.addEventListener('click', reset);
