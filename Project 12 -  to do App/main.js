@@ -1,9 +1,47 @@
+const toDoList = [];
+
+const form = document.querySelector('form');
+const ul = document.querySelector('ul');
+const taskNumber = document.querySelector('h1 span');
+// const listItems = document.querySelectorAll('li.task'); // returns NodeList
+const listItems = document.getElementsByClassName('task'); // returns HTMLCollection
+const input = document.querySelector('input');
+
 const removeTask = (e) => {
-    // e.target.parentNode.style.textDecoration = "line-through";
-    // e.target.remove();
     // e.target.parentNode.remove();
-    const index = e.target.dataset.key;
-    document.querySelector(`li[data-key="${index}"]`).remove();
+    const index = e.target.parentNode.dataset.key;
+    toDoList.splice(index, 1);
+    taskNumber.textContent = listItems.length;
+
+    renderList();
 }
 
-document.querySelectorAll('button[data-key]').forEach(item => item.addEventListener('click', removeTask));
+const addTask = (e) => {
+    e.preventDefault();
+    const titleTask = input.value;
+    if (titleTask === "") return;
+
+    const task = document.createElement('li');
+    task.className = 'task';
+    task.innerHTML = titleTask + "<button>Usuń</button>";
+
+    toDoList.push(task);
+
+    renderList();
+
+    input.value = "";
+    // const liItems = document.querySelectorAll('li.task').length;
+    taskNumber.textContent = listItems.length;
+    // task.querySelector('button').addEventListener('click', removeTask);
+    document.querySelector('li:last-child button').addEventListener('click', removeTask);
+}
+
+const renderList = () => {
+    ul.textContent = "";
+    toDoList.forEach((toDoElement, key) => {
+        toDoElement.dataset.key = key;
+        ul.appendChild(toDoElement);
+    });
+}
+
+form.addEventListener('submit', addTask);
