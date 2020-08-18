@@ -1,4 +1,5 @@
 class Wallet {
+
     constructor(money) {
         let _money = money;
 
@@ -17,12 +18,12 @@ class Wallet {
                 } else if (type === "-") {
                     return _money -= value;
                 } else {
-                    throw new Error("Nieprawidłowy typ działania");
+                    throw new Error("Invalid action type");
                 }
             } else {
-                console.log(typeof value);
-                throw new Error("Nieprawidłowa liczba");
+                throw new Error("Incorrect number");
             }
         }
+
     }
 }
